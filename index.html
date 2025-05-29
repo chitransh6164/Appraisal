@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autoplay Video Player</title>
+    <style>
+        /* Add some basic styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+        video {
+            width: 640px;
+            height: 360px;
+            border: 1px solid black;
+            margin-bottom: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+        h1 {
+            color: #00698f;
+        }
+        hr {
+            border-color: #ccc;
+        }
+        #popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fff;
+            padding: 20px;
+            border: 1px solid #ddd;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1><b><pre> Chitransh Ganesh Yadav </pre></b></h1>
+    <hr>
+    <h1>Appraisal by Anandmayee Sohani teacher:-</h1>
+    <video id="video-player-1" controls autoplay muted>
+        <source src="video4.mp4" type="video/mp4">
+    </video>
+    <br>
+    <hr>
+    <br>
+    <h1>Appraisal by Shadhana Sahasrabuddhe teacher:-</h1>
+    <video id="video-player-2" controls>
+        <source src="video2.mp4" type="video/mp4">
+    </video>
+    <video id="video-player-3" controls>
+        <source src="video3.mp4" type="video/mp4">
+    </video>
+    <video id="video-player-4" controls>
+        <source src="video1.mp4" type="video/mp4">
+    </video>
+    <br>
+    <hr>
+    <br>
+    <h1>Appraisal by Sanchita Naik teacher:-</h1>
+    <video id="video-player-5" controls>
+        <source src="video5.mp4" type="video/mp4">
+    </video>
+
+    <div id="popup">
+        <p>Video is currently muted. Do you want to unmute?</p>
+        <button id="unmute-btn">Unmute</button>
+        <button id="mute-btn">Stay Muted</button>
+    </div>
+
+    <script>
+        // Get the video player elements
+        const videoPlayers = [
+            document.getElementById("video-player-1"),
+            document.getElementById("video-player-2"),
+            document.getElementById("video-player-3"),
+            document.getElementById("video-player-4"),
+            document.getElementById("video-player-5")
+        ];
+
+        const popup = document.getElementById("popup");
+        const unmuteBtn = document.getElementById("unmute-btn");
+        const muteBtn = document.getElementById("mute-btn");
+
+        // Function to play the next video
+        function playNextVideo(currentIndex) {
+            if (currentIndex < videoPlayers.length - 1) {
+                videoPlayers[currentIndex + 1].play();
+            }
+        }
+
+        // Add an event listener to each video player
+        videoPlayers.forEach((videoPlayer, index) => {
+            videoPlayer.addEventListener("ended", () => {
+                playNextVideo(index);
+            });
+        });
+
+        videoPlayers[0].addEventListener("play", () => {
+            popup.style.display = "block";
+        });
+
+
+        unmuteBtn.addEventListener("click", () => {
+            videoPlayers.forEach((videoPlayer) => {
+                videoPlayer.muted = false;
+            });
+            popup.style.display = "none";
+        });
+
+        // Stay muted when mute button is clicked
+        muteBtn.addEventListener("click", () => {
+            popup.style.display = "none";
+        });
+    </script>
+</body>
+</html>
+          
